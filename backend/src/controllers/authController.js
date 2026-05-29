@@ -61,6 +61,7 @@ exports.login= async (req, res)=>{
                 expiresIn:'7d'
             }
         )
+        user.password= undefined
         res.status(201).json({
             message:"Login successfully !",
             token,

@@ -106,7 +106,31 @@ exports.getAllLectures = async (req, res) => {
     }
 
 }
+exports.getMyLectures = async (req, res) => {
 
+    try {
+
+        const lectures = await Lecture.find({
+            instructor: req.user._id
+        })
+        .populate({
+            path: "batch",
+            populate: {
+                path: "course"
+            }
+        })
+        .populate("instructor", "-password")
+
+        res.status(200).json(lectures)
+
+    } catch (error) {
+
+        res.status(500).json({
+            message: error.message
+        })
+
+    }
+}
 exports.getInstructorLectures = async (req, res) => {
 
     try {

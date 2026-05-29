@@ -15,7 +15,7 @@ exports.createBatch = async (req, res) => {
         }
 
          const batch = await Batch.create({
-            batchName,
+            name,
             course
         })
 
